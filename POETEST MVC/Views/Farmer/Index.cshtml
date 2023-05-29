@@ -1,0 +1,44 @@
+﻿@model IEnumerable<POETEST_MVC.Models.Farmer>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List of Farmers</h2>
+
+<p>
+    @Html.ActionLink("Create New Farmer", "CreateFarmer")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.farmerID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FarmerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.farmerID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FarmerName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UserID)
+    </td>
+    <td>
+        @Html.ActionLink("View Products", "ViewProducts", new {  farmerID=item.farmerID  })
+    </td>
+</tr>
+}
+
+</table>

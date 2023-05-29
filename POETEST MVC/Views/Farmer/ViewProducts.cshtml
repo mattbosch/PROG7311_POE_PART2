@@ -1,0 +1,79 @@
+﻿@model IEnumerable<POETEST_MVC.Models.Product>
+
+@{
+    ViewBag.Title = "ViewProducts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List of Products</h2>
+
+
+@using (Html.BeginForm("ViewProducts", "Farmer", FormMethod.Get))
+{
+    @Html.Hidden("farmerID", Model.FirstOrDefault()?.farmerID)
+<fieldset>
+    <legend>Filter Options</legend>
+    <div class="form-group">
+        <label for="startDate">Start Date:</label>
+        <input class="form-control" id="startDate" name="startDate" type="date" value="">
+    </div>
+    <div class="form-group">
+        <label for="endDate">End Date:</label>
+        <input class="form-control" id="endDate" name="endDate" type="date" value="">
+    </div>
+    <div class="form-group">
+        <label for="productType">Product Type:</label>
+        @Html.DropDownList("productType", ViewBag.ProductTypes as SelectList, "All", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Search" class="btn btn-primary">
+    </div>
+</fieldset>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.productID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.farmerID)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.productID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.product)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.farmerID)
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
