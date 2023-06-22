@@ -5,61 +5,74 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create Product</h2>
+<style>
+    .form-container {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f8f9fa;
+        border: 1px solid #ced4da;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
+        .form-container h4 {
+            margin-top: 0;
+        }
+</style>
 
-@using (Html.BeginForm("ProcessCreateProduct","Product")) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Product</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.product, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+<h2 class="text-center">Create Product</h2>
+
+<div class="container">
+    <div class="form-container">
+        @using (Html.BeginForm("ProcessCreateProduct", "Product", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <h4 class="text-center">Product</h4>
+            <hr />
+
+            @Html.HiddenFor(model => model.farmerID, new { value = ViewBag.FarmerID })
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.product, "Name:", htmlAttributes: new { @class = "control-label" })
                 @Html.EditorFor(model => model.product, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.product, "", new { @class = "text-danger" })
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.type, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="form-group">
+                @Html.LabelFor(model => model.type, "Type:", htmlAttributes: new { @class = "control-label" })
                 @Html.EditorFor(model => model.type, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.type, "", new { @class = "text-danger" })
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.date, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.date, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="form-group">
+                @Html.LabelFor(model => model.date, "Date:", htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.date, new { htmlAttributes = new { @class = "form-control", type = "date" } })
                 @Html.ValidationMessageFor(model => model.date, "", new { @class = "text-danger" })
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.farmerID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.farmerID, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="form-group">
+                @Html.LabelFor(model => model.farmerID, "Farmer ID:", htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.farmerID, new { htmlAttributes = new { @class = "form-control", @value = ViewBag.FarmerID, @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.farmerID, "", new { @class = "text-danger" })
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="form-group">
+                <div class="text-center">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </div>
+        }
+
+        <div class="mt-3">
+            <div class="text-center">
+                @Html.ActionLink("Back to List", "Index", new { farmerID = ViewBag.FarmerID }, new { @class = "btn btn-primary" })
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

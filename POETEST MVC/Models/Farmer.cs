@@ -9,7 +9,7 @@ namespace POETEST_MVC.Models
     public class Farmer
     {
         public int farmerID { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The farmer name field is required.")]
         public string FarmerName { get; set; }
         [Required]
         public string username { get; set; }

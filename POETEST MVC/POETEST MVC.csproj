@@ -141,6 +141,7 @@
     <Compile Include="Services\Data\SecurityDAO.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\POEdb.mdf" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -187,9 +188,7 @@
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Product\CreateProduct.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

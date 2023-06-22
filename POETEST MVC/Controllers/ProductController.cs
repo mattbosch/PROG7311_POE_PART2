@@ -36,12 +36,14 @@ namespace POETEST_MVC.Controllers
 
             ViewBag.ProductTypes = new SelectList(productTypes);
             ViewBag.SelectedProductType = productType;
+            ViewBag.FarmerID = farmerID;
 
             return View(products);
         }
 
-        public ActionResult CreateProduct()
+        public ActionResult CreateProduct(int farmerID)
         {
+            ViewBag.FarmerID = farmerID;
             return View("CreateProduct");
         }
 
@@ -57,6 +59,7 @@ namespace POETEST_MVC.Controllers
             }
             else
             {
+                ViewBag.FarmerID = productModel.farmerID;
                 return View("CreateProduct");
             }
         }
