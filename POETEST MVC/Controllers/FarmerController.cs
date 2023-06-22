@@ -59,6 +59,7 @@ namespace POETEST_MVC.Controllers
 
         public ActionResult ProcessCreateFarmer(Farmer Farmer)
         {
+            //checks whether all data has been entered. True: Moves to index page and creates farmer. False: Stays on Create Farmer page and notifies of validation errors.
             if (ModelState.IsValid)
             {
                 SecurityDAO farmerDAO = new SecurityDAO();

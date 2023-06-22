@@ -9,8 +9,12 @@ namespace POETEST_MVC.Services.Data
 {
     public class SecurityDAO
     {
+        //global variable declaration and connection string declaration
         int globalFarmerID = 0;
-        string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\POEdb.mdf;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\POEdb.mdf;";
+        //Integrated Security = True; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False
+
+        //Method to find a user, given a username and password, if the user exists the role of the user will be retrieved.
         internal bool FindUser(User user, out string role)
         {
             bool success = false;
@@ -55,6 +59,7 @@ namespace POETEST_MVC.Services.Data
 
         }
 
+        //method to retrieve a userID, given a username and password.
         public int getUserID(User user)
         {
             int userID = 0;
@@ -86,6 +91,7 @@ namespace POETEST_MVC.Services.Data
             return userID;
         }
 
+        //Method to retrieve the farmerID, given the userID.
         public int getFarmerID(int userID)
         {
             int newFarmerID = 0;
@@ -101,13 +107,6 @@ namespace POETEST_MVC.Services.Data
                 {
                     con.Open();
                     newFarmerID = Convert.ToInt32(cmd.ExecuteScalar());
-                    /*SqlDataReader reader = cmd.ExecuteReader();
-
-                    if (reader.HasRows)
-                    {
-                        newFarmerID = reader.GetInt32(0);
-                    }
-                    reader.Close();*/
                 }
                 catch (Exception ex)
                 {
@@ -123,6 +122,7 @@ namespace POETEST_MVC.Services.Data
             return newFarmerID;
         }
 
+        //Method to fetch all the farmers from the Farmer table
         public List<Farmer> fetchFarmers()
         {
             List<Farmer> returnList = new List<Farmer>();
@@ -167,6 +167,7 @@ namespace POETEST_MVC.Services.Data
 
         }
 
+        //Method to fetch all records from the products table, with the corresponding farmerID.
         public List<Product> fetchProducts(int farmerID)
         {
             globalFarmerID = farmerID;
@@ -217,6 +218,7 @@ namespace POETEST_MVC.Services.Data
 
         }
 
+        //Method to create a new user
         public int createUser(User user)
         {
             int userID = 0;
@@ -254,6 +256,7 @@ namespace POETEST_MVC.Services.Data
             return userID;
         }
 
+        //Method to create a new farmer and insert them into the database, while also creating a new user for the farmer to use as a log on.
         public void createFarmer(Farmer farmer)
         {
             User newUser = new User();
@@ -290,6 +293,7 @@ namespace POETEST_MVC.Services.Data
 
         }
 
+        //Method to create a new product and insert it into the database
         public void createProduct(Product product)
         {
 
@@ -324,6 +328,7 @@ namespace POETEST_MVC.Services.Data
 
         }
 
+        //Method to fetch the products within the specified date range from the database
         public List<Product> fetchProductsDateFilter(int farmerID, DateTime startDate, DateTime endDate)
         {
             List<Product> returnList = new List<Product>();

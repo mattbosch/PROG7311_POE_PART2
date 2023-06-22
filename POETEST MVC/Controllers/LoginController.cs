@@ -17,6 +17,7 @@ namespace POETEST_MVC.Controllers
             return View("Login");
         }
 
+        //Logic for determining the role of the user and redirecting them to the appropriate page.
         public ActionResult Login(User userModel)
         {
             SecurityDAO securityDAO = new SecurityDAO();

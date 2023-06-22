@@ -49,6 +49,7 @@ namespace POETEST_MVC.Controllers
 
         public ActionResult ProcessCreateProduct(Product productModel)
         {
+            //checks whether all data has been entered. True: Moves to index page and creates product. False: Stays on Create Product page and notifies of validation errors.
             if (ModelState.IsValid)
             {
                 SecurityDAO productDAO = new SecurityDAO();
